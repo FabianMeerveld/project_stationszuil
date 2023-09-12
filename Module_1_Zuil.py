@@ -5,6 +5,7 @@
 
 import datetime
 import random
+import os.path
 
 
 # functie die vraagt naar het bericht, controleert of deze korter is dan 140 tekens en of het bericht leeg is en
@@ -44,6 +45,11 @@ def get_station():
     station = station_list[random.randint(0, (len(station_list) - 1))]
     return station
 
+
+# controleer of het bestand met stations bestaat
+if not os.path.exists("Stations.txt"):
+    print("Stations file ontbreekt!")
+    exit()
 
 # loop die constant de data opvraagt en (deze vervolgens weg stuurt om op te slaan | moet nog gemaakt worden)
 while True:
