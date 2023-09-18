@@ -45,7 +45,12 @@ def get_station():
     return station
 
 
-# loop die constant de data opvraagt en (deze vervolgens weg stuurt om op te slaan | moet nog gemaakt worden)
+# functie die de gegevens wegschrijft in een bestand
+def write_stations(message, name, date, station):
+    print(message, name, date, station)
+
+
+# loop die constant de data opvraagt en deze vervolgens weg stuurt om op te slaan
 while True:
-    data = [get_message(), get_name(), get_date(), get_station()]
+    write_stations(get_message(), get_name(), get_date(), get_station())
     print("Bedankt voor uw bericht!")
