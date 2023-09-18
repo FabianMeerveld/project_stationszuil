@@ -45,8 +45,11 @@ def get_station():
     return station
 
 
-# functie die de gegevens wegschrijft in een bestand
+# functie die de gegevens wegschrijft in een bestand (nog fixen dat als er een comma in zit het blijft werken)
 def write_stations(message, name, date, station):
+    data = date + "," + message + "," + name + "," + station
+    review_file = open("Review.csv", "a")
+    review_file.write("\n" + data)
     print(message, name, date, station)
 
 
