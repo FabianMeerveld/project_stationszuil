@@ -19,6 +19,8 @@ def get_message():
             print("Uw bericht mag niet leeg zijn.")
             continue
         else:
+            if message.find(";"):
+                message = message.replace(";", ",")
             return message
 
 
@@ -40,17 +42,17 @@ def get_date():
 # functie die een willekeurige lijn uit een bestand met stations vraagt en deze terug geeft
 def get_station():
     station_file = open("Stations.txt", "r")
-    station_list = station_file.readlines()
+    station_list = station_file.read().splitlines()
     station = station_list[random.randint(0, (len(station_list) - 1))]
     return station
 
 
 # functie die de gegevens wegschrijft in een bestand (nog fixen dat als er een comma in zit het blijft werken)
 def write_stations(message, name, date, station):
-    data = f'{message},{name},{date},{station}'
+    data = f'{date};{message};{name};{station}'
     review_file = open("Review.csv", "a")
-    review_file.write("\n"+data)
-    print(message, name, date, station)
+    review_file.write("\n" + data)
+    review_file.close()
 
 
 # loop die constant de data opvraagt en deze vervolgens weg stuurt om op te slaan
