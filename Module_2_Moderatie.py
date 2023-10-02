@@ -1,19 +1,24 @@
 import datetime
 
+
 def Post_name(name, email):
     # post name to database
     return
 
+
 def Post_review(time, email, review, goedkeuring):
     print("1")
+
+
 def Get_date():
     date = datetime.datetime.now().strftime("%Y-%m-%d|%H:%M:%S")
     return date
 
+
 def Get_name(email):
     name = ""
     # haal naam op uit database
-    if name == "": #vraag naar naam als naam niet in database staat
+    if name == "":  # vraag naar naam als naam niet in database staat
         while True:
             name = input("Wat is uw naam: \n")
             if name == "":
@@ -23,6 +28,7 @@ def Get_name(email):
                 Post_name(name, email)
                 break
     return name
+
 
 def Get_review():
     file = open("Review.csv")
@@ -34,6 +40,7 @@ def Get_review():
     else:
         review = lines[0].split(";")
     return review
+
 
 def Remove_review(review):
     review = f'{review[0]};{review[1]};{review[2]};{review[3]}'
@@ -61,16 +68,30 @@ def Startup():
         else:
             print("Voer een geldig email adres in")
             continue
-    name = Get_name(email)
+    Get_name(email)
     while True:
         review = Get_review()
         if review == "break":
+            print("Alle reviews zijn beoordeeld, druk op enter om af te sluiten")
+            input("")
             break
         else:
-            print(f"Op {review[0]} schreef {review[2]} op station {review[3].strip()} het volgende bericht:\n{review[1]}")
+            print(
+                f"Op {review[0]} schreef {review[2]} op station {review[3].strip()} het volgende bericht:\n{review[1]}")
             print("Kies 1 om het bericht goed te keuren en 2 om het bericht af te keuren")
-            keuze = input("")
-            Post_review(Get_date(),email,review,keuze)
+            while True:
+                keuze = input("")
+                if keuze == "1":
+                    keuze = "Goedgekeurd"
+                    break
+                elif keuze == "2":
+                    keuze = "Afgekeurd"
+                    break
+                else:
+                    print("input onjuist")
+                    continue
+            Post_review(Get_date(), email, review, keuze)
             Remove_review(review)
+
 
 Startup()
