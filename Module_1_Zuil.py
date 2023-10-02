@@ -51,7 +51,7 @@ def get_station():
 def write_stations(message, name, date, station):
     data = f'{date};{message};{name};{station}'
     review_file = open("Review.csv", "a")
-    review_file.write("\n" + data)
+    review_file.write(data + "\n")
     review_file.close()
 
 
