@@ -1,6 +1,7 @@
 import datetime
 
 
+
 def Post_name(name, email):
     # post name to database
     return
@@ -60,9 +61,11 @@ def Remove_review(review):
 
 
 def Startup():
+    review_file = open("Review.csv", "a")
+    review_file.close()
     print("Welkom bij de moderatie module")
     while True:
-        email = input("Wat is uw email: \n")
+        email = input("Wat is uw email: ")
         if "@" in email and "." in email and not " " in email:
             break
         else:
