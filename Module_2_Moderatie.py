@@ -1,10 +1,16 @@
 import datetime
+import psycopg2
 
+def Make_connenction():
+    host = '20.160.193.51'
+    port = 5432
+    name = 'stationszuil'
+    user = 'postgres'
+    password = 'Bami'
+    info_string = f"host='{host}' port='{port}' dbname='{name}' user='{user}' password='{password}'"
+    connection = psycopg2.connect(info_string)
+    return connection
 
-
-def Post_name(name, email):
-    # post name to database
-    return
 
 
 def Post_review(time, email, review, goedkeuring):
@@ -12,23 +18,37 @@ def Post_review(time, email, review, goedkeuring):
 
 
 def Get_date():
-    date = datetime.datetime.now().strftime("%Y-%m-%d|%H:%M:%S")
+    date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return date
 
 
+
+
 def Get_name(email):
-    name = ""
-    # haal naam op uit database
-    if name == "":  # vraag naar naam als naam niet in database staat
+    connection = Make_connenction()
+    cursor = connection.cursor()
+    query = f"""SELECT naam
+                FROM moderator
+                WHERE email = '{email}'
+                """
+    cursor.execute(query)
+    records = cursor.fetchall()
+    if len(records) == 0:
         while True:
-            name = input("Wat is uw naam: \n")
-            if name == "":
+            naam = input("Wat is uw naam: ")
+            if naam == "":
                 print("Uw naam mag niet leeg zijn")
                 continue
             else:
-                Post_name(name, email)
+                query1 = """INSERT INTO moderator(naam, email) VALUES (%s,%s)"""
+                data = (naam,email)
+                cursor.execute(query1,data)
+                connection.commit()
                 break
-    return name
+    else:
+        naam = records[0][0]
+    connection.close()
+    return naam
 
 
 def Get_review():
@@ -71,7 +91,8 @@ def Startup():
         else:
             print("Voer een geldig email adres in")
             continue
-    Get_name(email)
+    name = Get_name(email)
+    print(f"Welkom {name}")
     while True:
         review = Get_review()
         if review == "break":
@@ -85,10 +106,10 @@ def Startup():
             while True:
                 keuze = input("")
                 if keuze == "1":
-                    keuze = "Goedgekeurd"
+                    keuze = True
                     break
                 elif keuze == "2":
-                    keuze = "Afgekeurd"
+                    keuze = False
                     break
                 else:
                     print("input onjuist")

@@ -35,7 +35,7 @@ def get_name():
 
 # functie die de huidige datum en tijd terug geeft
 def get_date():
-    date = datetime.datetime.now().strftime("%Y-%m-%d|%H:%M:%S")
+    date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return date
 
 
