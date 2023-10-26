@@ -14,7 +14,17 @@ def Make_connenction():
 
 
 def Post_review(time, email, review, goedkeuring):
-    print("1")
+    bericht = review[1]
+    time_review = review[0]
+    naam = review[2]
+    station = review[3].strip()
+
+    connection = Make_connenction()
+    cursor = connection.cursor()
+    query = """INSERT INTO review(bericht, datum_ingedient, datum_moderatie, naam, keuring, moderatoremail, station) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+    data = (bericht,time_review,time,naam,goedkeuring,email,station)
+    cursor.execute(query, data)
+    connection.commit()
 
 
 def Get_date():
