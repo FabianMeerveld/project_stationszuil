@@ -1,6 +1,7 @@
 import datetime
 import psycopg2
 
+
 def Make_connenction():
     host = '20.160.193.51'
     port = 5432
@@ -12,7 +13,6 @@ def Make_connenction():
     return connection
 
 
-
 def Post_review(time, email, review, goedkeuring):
     bericht = review[1]
     time_review = review[0]
@@ -21,8 +21,9 @@ def Post_review(time, email, review, goedkeuring):
 
     connection = Make_connenction()
     cursor = connection.cursor()
-    query = """INSERT INTO review(bericht, datum_ingedient, datum_moderatie, naam, keuring, moderatoremail, station) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
-    data = (bericht,time_review,time,naam,goedkeuring,email,station)
+    query = """INSERT INTO review(bericht, datum_ingedient, datum_moderatie, naam, keuring, moderatoremail, station) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s)"""
+    data = (bericht, time_review, time, naam, goedkeuring, email, station)
     cursor.execute(query, data)
     connection.commit()
 
@@ -30,8 +31,6 @@ def Post_review(time, email, review, goedkeuring):
 def Get_date():
     date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return date
-
-
 
 
 def Get_name(email):
@@ -51,8 +50,8 @@ def Get_name(email):
                 continue
             else:
                 query1 = """INSERT INTO moderator(naam, email) VALUES (%s,%s)"""
-                data = (naam,email)
-                cursor.execute(query1,data)
+                data = (naam, email)
+                cursor.execute(query1, data)
                 connection.commit()
                 break
     else:
