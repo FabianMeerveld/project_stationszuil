@@ -1,4 +1,5 @@
 import tkinter as tk
+import time
 from tkinter import simpledialog
 from PIL import Image, ImageTk
 import requests
@@ -120,12 +121,40 @@ def MakeGui():
     images["img_01d"] = img_01d
     image = Image.open('images/02d.png')
     img_02d = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_02d"] = img_02d
     image = Image.open('images/03d.png')
     img_03d = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_03d"] = img_03d
     image = Image.open('images/04d.png')
     img_04d = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_04d"] = img_04d
     image = Image.open('images/09d.png')
     img_09d = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_09d"] = img_09d
+    image = Image.open('images/10d.png')
+    img_10d = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_10d"] = img_10d
+    image = Image.open('images/11d.png')
+    img_11d = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_11d"] = img_11d
+    image = Image.open('images/13d.png')
+    img_13d = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_13d"] = img_13d
+    image = Image.open('images/50d.png')
+    img_50d = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_50d"] = img_50d
+    image = Image.open('images/img_pr.png')
+    img_pr = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_pr"] = img_pr
+    image = Image.open('images/img_ovfiets.png')
+    img_ovfiets = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_ovfiets"] = img_ovfiets
+    image = Image.open('images/img_lift.png')
+    img_lift = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_lift"] = img_lift
+    image = Image.open('images/img_toilet.png')
+    img_toilet = ImageTk.PhotoImage(image.resize((100, 100)))
+    images["img_toilet"] = img_toilet
 
     print(images)
     # tussenlijntjes
@@ -134,91 +163,113 @@ def MakeGui():
     ylineframe = tk.Frame(root, background="#003082")
     ylineframe.grid(column=0, row=3, columnspan=8, sticky="nsew")
 
+
     # stationinfo
     stationlabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f" {station}", font="Arial, 45")
     stationlabel.grid(column=0, row=0, rowspan=3, sticky="w")
-    stationicon2label = tk.Label(root, bg="#FFC917", image=images["img_01d"], fg="#003082",text="")
-    stationicon2label.grid(row=0, column=2, sticky="e")
-    stationicon3label = tk.Label(root, bg="#FFC917", image=images["img_01d"], fg="#003082",text="")
-    stationicon3label.grid(row=0, column=3, sticky="w")
-    stationicon5label = tk.Label(root, bg="#FFC917", image=images["img_01d"], fg="#003082",text="")
-    stationicon5label.grid(row=2, column=2, sticky="e")
-    stationicon6label = tk.Label(root, bg="#FFC917", image=images["img_01d"], fg="#003082",text="")
-    stationicon6label.grid(row=2, column=3, sticky="w")
+    if stationinfo[2]:
+        stationicon2label = tk.Label(root, bg="#FFC917", image=images["img_ovfiets"], fg="#003082",text="")
+        stationicon2label.grid(row=0, column=2, sticky="e")
+    if stationinfo[3]:
+        stationicon3label = tk.Label(root, bg="#FFC917", image=images["img_lift"], fg="#003082",text="")
+        stationicon3label.grid(row=0, column=3, sticky="w")
+    if stationinfo[4]:
+        stationicon5label = tk.Label(root, bg="#FFC917", image=images["img_toilet"], fg="#003082",text="")
+        stationicon5label.grid(row=2, column=2, sticky="e")
+    if stationinfo[5]:
+        stationicon6label = tk.Label(root, bg="#FFC917", image=images["img_pr"], fg="#003082",text="")
+        stationicon6label.grid(row=2, column=3, sticky="w")
 
     # tijd
-    timelabel = tk.Label(root, bg="#FFC917", fg="#003082",text="12:00:00", font="Arial, 32")
+    def tijd():
+        nutijd = time.strftime("%H:%M:%S")
+        timelabel.config(text=nutijd)
+        timelabel.after(1000, tijd)
+
+    timelabel = tk.Label(root, bg="#FFC917", fg="#003082",text="12:00:00", font="Arial, 45")
     timelabel.grid(column=5, row=0, columnspan=3, rowspan=3, sticky="nsew")
 
     # weer
-    weer1datumlabel = tk.Label(root, bg="#FFC917", fg="#003082",text="00-00", font="Arial, 50")
-    weer1imagelabel = tk.Label(root, bg="#FFC917", image=images["img_01d"], fg="#003082",text="")
-    weer1templabel = tk.Label(root, bg="#FFC917", fg="#003082",text="0°C", font="Arial, 50")
+    weer1datumlabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f"{weer[0][0][0]}-{weer[0][0][1]}", font="Arial, 50")
+    weer1imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[0][1]}"], fg="#003082",text="")
+    weer1templabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f"{weer[0][2]}°C", font="Arial, 50")
     weer1datumlabel.grid(column=5, row=4, sticky="nsew", rowspan=2)
     weer1imagelabel.grid(column=6, row=4, sticky="nsew", rowspan=2)
     weer1templabel.grid(column=7, row=4, sticky="nsew", rowspan=2)
 
-    weer2datumlabel = tk.Label(root, bg="#FFC917", fg="#003082",text="00-00", font="Arial, 50")
-    weer2imagelabel = tk.Label(root, bg="#FFC917", image=images["img_01d"], fg="#003082",text="")
-    weer2templabel = tk.Label(root, bg="#FFC917", fg="#003082",text="0°C", font="Arial, 50")
+    weer2datumlabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f"{weer[1][0][0]}-{weer[1][0][1]}", font="Arial, 50")
+    weer2imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[1][1]}"], fg="#003082",text="")
+    weer2templabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f"{weer[1][2]}°C", font="Arial, 50")
     weer2datumlabel.grid(column=5, row=6, sticky="nsew", rowspan=2)
     weer2imagelabel.grid(column=6, row=6, sticky="nsew", rowspan=2)
     weer2templabel.grid(column=7, row=6, sticky="nsew", rowspan=2)
 
-    weer3datumlabel = tk.Label(root, bg="#FFC917", fg="#003082",text="00-00", font="Arial, 50")
-    weer3imagelabel = tk.Label(root, bg="#FFC917", image=images["img_01d"], fg="#003082",text="")
-    weer3templabel = tk.Label(root, bg="#FFC917", fg="#003082",text="0°C", font="Arial, 50")
+    weer3datumlabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f"{weer[2][0][0]}-{weer[2][0][1]}", font="Arial, 50")
+    weer3imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[2][1]}"], fg="#003082",text="")
+    weer3templabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f"{weer[2][2]}°C", font="Arial, 50")
     weer3datumlabel.grid(column=5, row=8, sticky="nsew", rowspan=2)
     weer3imagelabel.grid(column=6, row=8, sticky="nsew", rowspan=2)
     weer3templabel.grid(column=7, row=8, sticky="nsew", rowspan=2)
 
-    weer4datumlabel = tk.Label(root, bg="#FFC917", fg="#003082",text="00-00", font="Arial, 50")
-    weer4imagelabel = tk.Label(root, bg="#FFC917", image=images["img_01d"], fg="#003082",text="")
-    weer4templabel = tk.Label(root, bg="#FFC917", fg="#003082",text="0°C", font="Arial, 50")
+    weer4datumlabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f"{weer[3][0][0]}-{weer[3][0][1]}", font="Arial, 50")
+    weer4imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[3][1]}"], fg="#003082",text="")
+    weer4templabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f"{weer[3][2]}°C", font="Arial, 50")
     weer4datumlabel.grid(column=5, row=10, sticky="nsew", rowspan=2)
     weer4imagelabel.grid(column=6, row=10, sticky="nsew", rowspan=2)
     weer4templabel.grid(column=7, row=10, sticky="nsew", rowspan=2)
 
-    weer5datumlabel = tk.Label(root, bg="#FFC917", fg="#003082",text="00-00", font="Arial, 50")
-    weer5imagelabel = tk.Label(root, bg="#FFC917", image=images["img_01d"], fg="#003082",text="")
-    weer5templabel = tk.Label(root, bg="#FFC917", fg="#003082",text="0°C", font="Arial, 50")
+    weer5datumlabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f"{weer[4][0][0]}-{weer[4][0][1]}", font="Arial, 50")
+    weer5imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[4][1]}"], fg="#003082",text="")
+    weer5templabel = tk.Label(root, bg="#FFC917", fg="#003082",text=f"{weer[4][2]}°C", font="Arial, 50")
     weer5datumlabel.grid(column=5, row=12, sticky="nsew", rowspan=2)
     weer5imagelabel.grid(column=6, row=12, sticky="nsew", rowspan=2)
     weer5templabel.grid(column=7, row=12, sticky="nsew", rowspan=2)
 
     # review
-    review1berichtlabel = tk.Label(root, bg="#FFC917",
-                                   fg="#070721",text='"Embrace the challenges, for they are the stepping stones to success. Keep learning, growing, and pursuing your dreams"',
+    if len(reviews) == 0:
+        review7berichtlabel = tk.Label(root, bg="#FFC917",
+                                   fg="#070721",text=f'Er zijn nog geen reviews voor dit station',
                                    font="Arial, 25", wraplength=850)
-    review1naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text="-{naamplaceholder}", font="Arial 15")
-    review1berichtlabel.grid(column=0, row=4, columnspan=2, rowspan=2, sticky="nsew")
-    review1naamlabel.grid(column=2, row=5, sticky="nesw")
-    review2berichtlabel = tk.Label(root, bg="#FFC917",
-                                   fg="#070721",text='"Embrace the challenges, for they are the stepping stones to success. Keep learning, growing, and pursuing your dreams"',
+        review7naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text=f"-.........", font="Arial 15", anchor="e")
+        review7berichtlabel.grid(column=0, row=4, columnspan=2, rowspan=2, sticky="nsew")
+        review7naamlabel.grid(column=2, row=5, columnspan=2, sticky="nesw")
+    if len(reviews) >= 1:
+        review1berichtlabel = tk.Label(root, bg="#FFC917",
+                                   fg="#070721",text=f'"{reviews[0][0]}"',
                                    font="Arial, 25", wraplength=850)
-    review2naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text="-{naamplaceholder}", font="Arial 15")
-    review2berichtlabel.grid(column=0, row=6, columnspan=2, rowspan=2, sticky="nsew")
-    review2naamlabel.grid(column=2, row=7, sticky="se")
-    review3berichtlabel = tk.Label(root, bg="#FFC917",
-                                   fg="#070721",text='"Embrace the challenges, for they are the stepping stones to success. Keep learning, growing, and pursuing your dreams"',
+        review1naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text=f"-{reviews[0][1]}", font="Arial 15", anchor="e")
+        review1berichtlabel.grid(column=0, row=4, columnspan=2, rowspan=2, sticky="nsew")
+        review1naamlabel.grid(column=2, row=5, columnspan=2, sticky="nesw")
+    if len(reviews) >= 2:
+        review2berichtlabel = tk.Label(root, bg="#FFC917",
+                                   fg="#070721",text=f'"{reviews[1][0]}"',
                                    font="Arial, 25", wraplength=850)
-    review3naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text="-{naamplaceholder}", font="Arial 15")
-    review3berichtlabel.grid(column=0, row=8, columnspan=2, rowspan=2, sticky="nsew")
-    review3naamlabel.grid(column=2, row=9, sticky="se")
-    review4berichtlabel = tk.Label(root, bg="#FFC917",
-                                   fg="#070721",text='"Embrace the challenges, for they are the stepping stones to success. Keep learning, growing, and pursuing your dreams"',
+        review2naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text=f"-{reviews[1][1]}", font="Arial 15", anchor="e")
+        review2berichtlabel.grid(column=0, row=6, columnspan=2, rowspan=2, sticky="nsew")
+        review2naamlabel.grid(column=2, row=7, columnspan=2, sticky="se")
+    if len(reviews) >= 3:
+        review3berichtlabel = tk.Label(root, bg="#FFC917",
+                                   fg="#070721",text=f'"{reviews[2][0]}"',
                                    font="Arial, 25", wraplength=850)
-    review4naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text="-{naamplaceholder}", font="Arial 15")
-    review4berichtlabel.grid(column=0, row=10, columnspan=2, rowspan=2, sticky="nsew")
-    review4naamlabel.grid(column=2, row=11, sticky="se")
-    review5berichtlabel = tk.Label(root, bg="#FFC917",
-                                   fg="#070721",text='"Embrace the challenges, for they are the stepping stones to success. Keep learning, growing, and pursuing your dreams"',
+        review3naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text=f"-{reviews[2][1]}", font="Arial 15", anchor="e")
+        review3berichtlabel.grid(column=0, row=8, columnspan=2, rowspan=2, sticky="nsew")
+        review3naamlabel.grid(column=2, row=9, columnspan=2, sticky="se")
+    if len(reviews) >= 4:
+        review4berichtlabel = tk.Label(root, bg="#FFC917",
+                                   fg="#070721",text=f'"{reviews[3][0]}"',
                                    font="Arial, 25", wraplength=850)
-    review5naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text="-{naamplaceholder}", font="Arial 15")
-    review5berichtlabel.grid(column=0, row=12, columnspan=2, rowspan=2, sticky="nsew")
-    review5naamlabel.grid(column=2, row=13, sticky="se")
+        review4naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text=f"-{reviews[3][1]}", font="Arial 15", anchor="e")
+        review4berichtlabel.grid(column=0, row=10, columnspan=2, rowspan=2, sticky="nsew")
+        review4naamlabel.grid(column=2, row=11, columnspan=2, sticky="se")
+    if len(reviews) >= 5:
+        review5berichtlabel = tk.Label(root, bg="#FFC917",
+                                   fg="#070721",text=f'"{reviews[4][0]}"',
+                                   font="Arial, 25", wraplength=850)
+        review5naamlabel = tk.Label(root, bg="#FFC917", fg="#39394D",text=f"-{reviews[4][1]}", font="Arial 15", anchor="e")
+        review5berichtlabel.grid(column=0, row=12, columnspan=2, rowspan=2, sticky="nsew")
+        review5naamlabel.grid(column=2, row=13, columnspan=2, sticky="se")
 
-
+    tijd()
     root.mainloop()
 
 
