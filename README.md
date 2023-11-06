@@ -4,7 +4,12 @@
 Project vanuit de NS om makkelijker feedback te krijgen van klanten
 
 
-
+Module 1:
+- Zuil waar klanten van de NS feedback kunnen geven.
+Module 2:
+- Applicatie waar moderatoren de feedback kunnen goed of afkeuren.
+Module 3:
+- Applicatie om feedback, weer, tijd en faciliteiten van een station weer te geven.
 ## Deployment
 Eerst moet de database aangemaakt worden:
 - [database ddl](https://github.com/FabianMeerveld/project_stationszuil/blob/main/station-database.ddl)
