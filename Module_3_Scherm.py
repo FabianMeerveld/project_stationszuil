@@ -8,6 +8,7 @@ import psycopg2
 key = "b843235546375e04da44b6fb8b10f175"
 
 
+# functie die het weer ophaalt door middel van een api
 def GetWeather(plaats, land):  # plaatsnaam en landcode
     link = f"http://api.openweathermap.org/geo/1.0/direct?q={plaats},{land}&limit=1&appid={key}"
     response = requests.get(link)
@@ -43,6 +44,7 @@ def GetWeather(plaats, land):  # plaatsnaam en landcode
     return info
 
 
+# functie die verbinding maakt met de database en de connection teruggeeft
 def Make_connenction():
     host = '20.160.193.51'
     port = 5432
@@ -54,6 +56,7 @@ def Make_connenction():
     return connection
 
 
+# functie die reviews ophaalt uit de database
 def Get_review(station):
     connection = Make_connenction()
     cursor = connection.cursor()
@@ -68,6 +71,7 @@ def Get_review(station):
     return records
 
 
+# functie die station info ophaalt uit de database
 def Get_stationinfo(station):
     connection = Make_connenction()
     cursor = connection.cursor()
@@ -80,6 +84,7 @@ def Get_stationinfo(station):
     return records
 
 
+# functie die de gui maakt en naar het station vraagt
 def MakeGui():
     stationinfo = None
     juiststation = False

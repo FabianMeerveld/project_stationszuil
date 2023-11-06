@@ -2,6 +2,7 @@ import datetime
 import psycopg2
 
 
+# functie die de connectie met de database aanmaakt en de connection terug geeft
 def Make_connenction():
     host = '20.160.193.51'
     port = 5432
@@ -13,6 +14,7 @@ def Make_connenction():
     return connection
 
 
+# functie de review naar de database stuurt
 def Post_review(time, email, review, goedkeuring):
     bericht = review[1]
     time_review = review[0]
@@ -28,11 +30,13 @@ def Post_review(time, email, review, goedkeuring):
     connection.commit()
 
 
+# functie die de tijd en datum opvraagt
 def Get_date():
     date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return date
 
 
+# functie die de naar vraagt en deze koppelt aan een email
 def Get_name(email):
     connection = Make_connenction()
     cursor = connection.cursor()
@@ -60,6 +64,7 @@ def Get_name(email):
     return naam
 
 
+# functie die een review opvraagt uit het bestand
 def Get_review():
     file = open("Review.csv")
     lines = file.readlines()
@@ -72,6 +77,7 @@ def Get_review():
     return review
 
 
+# functie die de review uit de file haalt
 def Remove_review(review):
     review = f'{review[0]};{review[1]};{review[2]};{review[3]}'
     file = open("Review.csv", "r")
@@ -89,6 +95,7 @@ def Remove_review(review):
     file.close()
 
 
+# functie die alles regelt
 def Startup():
     review_file = open("Review.csv", "a")
     review_file.close()
