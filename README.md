@@ -36,6 +36,7 @@ Om het stations zuil te starten gebruik je het volgende command.
   python Module_3_Scherm.py
 ```
 vervolgens voer je een van de [stations](https://github.com/FabianMeerveld/project_stationszuil/blob/main/Stations.txt) uit de lijst in.
+Sluiten kan door middel van alt+f4
 
 
 ## Authors
