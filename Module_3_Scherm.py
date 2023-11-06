@@ -63,6 +63,7 @@ def Get_review(station):
     query = f"""SELECT bericht, naam
                 FROM review
                 WHERE station = '{station}'
+                AND keuring = true
                 ORDER BY datum_ingedient DESC
                 LIMIT 5
                 """
