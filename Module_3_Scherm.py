@@ -234,7 +234,7 @@ def MakeGui():
     # weer
     weer1datumlabel = tk.Label(root, bg="#FFC917", fg="#003082", text=f"{weer[0][0][0]}-{weer[0][0][1]}",
                                font="Arial, 50")
-    weer1imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[0][1]}"], fg="#003082", text="")
+    weer1imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[0][1][:-1] + 'd'}"], fg="#003082", text="")
     weer1templabel = tk.Label(root, bg="#FFC917", fg="#003082", text=f"{weer[0][2]}°C", font="Arial, 50")
     weer1datumlabel.grid(column=5, row=4, sticky="nsew", rowspan=2)
     weer1imagelabel.grid(column=6, row=4, sticky="nsew", rowspan=2)
@@ -242,7 +242,7 @@ def MakeGui():
 
     weer2datumlabel = tk.Label(root, bg="#FFC917", fg="#003082", text=f"{weer[1][0][0]}-{weer[1][0][1]}",
                                font="Arial, 50")
-    weer2imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[1][1]}"], fg="#003082", text="")
+    weer2imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[1][1][:-1] + 'd'}"], fg="#003082", text="")
     weer2templabel = tk.Label(root, bg="#FFC917", fg="#003082", text=f"{weer[1][2]}°C", font="Arial, 50")
     weer2datumlabel.grid(column=5, row=6, sticky="nsew", rowspan=2)
     weer2imagelabel.grid(column=6, row=6, sticky="nsew", rowspan=2)
@@ -250,7 +250,7 @@ def MakeGui():
 
     weer3datumlabel = tk.Label(root, bg="#FFC917", fg="#003082", text=f"{weer[2][0][0]}-{weer[2][0][1]}",
                                font="Arial, 50")
-    weer3imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[2][1]}"], fg="#003082", text="")
+    weer3imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[2][1][:-1] + 'd'}"], fg="#003082", text="")
     weer3templabel = tk.Label(root, bg="#FFC917", fg="#003082", text=f"{weer[2][2]}°C", font="Arial, 50")
     weer3datumlabel.grid(column=5, row=8, sticky="nsew", rowspan=2)
     weer3imagelabel.grid(column=6, row=8, sticky="nsew", rowspan=2)
@@ -258,7 +258,7 @@ def MakeGui():
 
     weer4datumlabel = tk.Label(root, bg="#FFC917", fg="#003082", text=f"{weer[3][0][0]}-{weer[3][0][1]}",
                                font="Arial, 50")
-    weer4imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[3][1]}"], fg="#003082", text="")
+    weer4imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[3][1][:-1] + 'd'}"], fg="#003082", text="")
     weer4templabel = tk.Label(root, bg="#FFC917", fg="#003082", text=f"{weer[3][2]}°C", font="Arial, 50")
     weer4datumlabel.grid(column=5, row=10, sticky="nsew", rowspan=2)
     weer4imagelabel.grid(column=6, row=10, sticky="nsew", rowspan=2)
@@ -266,7 +266,7 @@ def MakeGui():
 
     weer5datumlabel = tk.Label(root, bg="#FFC917", fg="#003082", text=f"{weer[4][0][0]}-{weer[4][0][1]}",
                                font="Arial, 50")
-    weer5imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[4][1]}"], fg="#003082", text="")
+    weer5imagelabel = tk.Label(root, bg="#FFC917", image=images[f"img_{weer[4][1][:-1] + 'd'}"], fg="#003082", text="")
     weer5templabel = tk.Label(root, bg="#FFC917", fg="#003082", text=f"{weer[4][2]}°C", font="Arial, 50")
     weer5datumlabel.grid(column=5, row=12, sticky="nsew", rowspan=2)
     weer5imagelabel.grid(column=6, row=12, sticky="nsew", rowspan=2)
